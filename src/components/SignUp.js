@@ -13,7 +13,7 @@ const SignUp = () => {
         if(auth) {
             navigate('/')
         }
-    })
+    }, [])
 
     const collectData = async() => {
         let result = await fetch(SIGN_UP_URL, {
