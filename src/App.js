@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
-import Nav from './Nav';
-import Footer from './Footer';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 function App() {
