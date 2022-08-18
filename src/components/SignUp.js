@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { SIGN_UP_URL, POST, APPLICATION_JSON } from '../app.constant';
 import {useNavigate} from 'react-router-dom';
 
@@ -7,6 +7,13 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const auth = localStorage.getItem('user');
+        if(auth) {
+            navigate('/')
+        }
+    })
 
     const collectData = async() => {
         let result = await fetch(SIGN_UP_URL, {
@@ -18,6 +25,7 @@ const SignUp = () => {
         });
         result = await result.json();
         console.warn(result);
+        localStorage.setItem("user", JSON.stringify(result));
         if(result) {
             navigate('/')
         }
