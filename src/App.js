@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Nav from './Nav';
+import Footer from './Footer';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/profile" element={<h1>Profile Component </h1>} />
         </Routes>
       </BrowserRouter>
+      <Footer/>
     </div>
   );
 }

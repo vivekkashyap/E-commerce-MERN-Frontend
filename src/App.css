@@ -1,6 +1,26 @@
+.nav-ul {
+  padding: 5px;
+  margin: 0;
+  background-color: grey;
+}
+
 .nav-ul li {
   display: inline-block;
   padding: 10px;
+}
+
+.nav-ul li a {
+  color: #fff;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  background-color: grey;
 }
 
 @media (prefers-reduced-motion: no-preference) {
