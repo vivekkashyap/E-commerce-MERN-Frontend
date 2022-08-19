@@ -3,6 +3,7 @@ export const LOGIN_URL = 'http://localhost:5000/login';
 export const ADD_PRODUCT_URL = 'http://localhost:5000/add-product';
 export const GET_PRODUCTS_URL = 'http://localhost:5000/products';
 export const PRODUCT_URL = 'http://localhost:5000/product/';
+export const SEARCH_URL = 'http://localhost:5000/search/';
 export const PUT = 'Put';
 export const POST = 'post';
 export const DELETE = 'Delete';
