@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ADD_PRODUCT_URL, APPLICATION_JSON, POST } from '../app.constant';
 
 const AddProduct = () => {
@@ -10,7 +9,6 @@ const AddProduct = () => {
     const [error, setError] = React.useState(false);
 
     const addProduct = async () => {
-        console.warn(isNaN(price));
         if(!name || !price || isNaN(price) || !category || !company){
             setError(true);
             return false;

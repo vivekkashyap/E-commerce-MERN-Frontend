@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { DELETE, DELETE_PRODUCT_URL, GET_PRODUCTS_URL, POST } from '../app.constant';
+import { Link } from 'react-router-dom';
+import { DELETE, PRODUCT_URL, GET_PRODUCTS_URL } from '../app.constant';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ const ProductList = () => {
     }
 
     const deleteProduct = async (id) => {
-        let result = await fetch(DELETE_PRODUCT_URL + id, {
+        let result = await fetch(PRODUCT_URL + id, {
             method: DELETE
         });
         result = await result.json();
@@ -44,7 +45,10 @@ const ProductList = () => {
                     <li> ₹{item.price} </li>
                     <li> {item.category} </li>
                     <li> {item.company} </li>
-                    <li> <button onClick={() => deleteProduct(item._id)}>Delete</button> </li>
+                    <li>
+                        <button onClick={() => deleteProduct(item._id)}>Delete</button>
+                        <Link to={"/update/" + item._id}> Update </Link>    
+                    </li>
                 </ul>
                 )
             }
