@@ -19,16 +19,18 @@ const UpdateProduct = () => {
     }, [])
 
     const getProductdetails = async () => {
-        let result = await fetch(PRODUCT_URL + params.id, {
-            headers: { 
+        await fetch(PRODUCT_URL + params.id, {
+            headers: {
                 Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
+        }).then((res) => {
+            return res.json();
+        }).then((result) => {
+            setName(result.name);
+            setPrice(result.price);
+            setCategory(result.category);
+            setCompany(result.company);
         });
-        result = await result.json();
-        setName(result.name);
-        setPrice(result.price);
-        setCategory(result.category);
-        setCompany(result.company);
     }
 
     const updateProduct = async () => {
@@ -36,19 +38,21 @@ const UpdateProduct = () => {
             setError(true);
             return false;
         }
-        let result = await fetch(PRODUCT_URL + params.id, {
+        await fetch(PRODUCT_URL + params.id, {
             method: PUT,
             body: JSON.stringify({ name, price, category, company }),
             headers: {
                 'Content-Type': APPLICATION_JSON,
                 Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
+        }).then((res) => {
+            return res.json();
+        }).then((result) => {
+            if (result) {
+                alert("Product Updated Successfully");
+                navigate('/');
+            }
         });
-        result = await result.json();
-        if (result) {
-            alert("Product Updated Successfully");
-            navigate('/');
-        }
     }
 
     return (

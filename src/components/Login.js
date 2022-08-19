@@ -24,16 +24,18 @@ const Login = () => {
             headers: {
                 'Content-Type': APPLICATION_JSON
             }
+        }).then((res) => {
+            return res.json();
+        }).then((result) => {
+            console.warn(result);
+            if (result.auth) {
+                localStorage.setItem("user", JSON.stringify(result.user));
+                localStorage.setItem("token", JSON.stringify(result.auth));
+                navigate("/");
+            } else {
+                alert("Please enter correct Details");
+            }
         });
-        result = await result.json();
-        console.warn(result);
-        if(result.auth) {
-            localStorage.setItem("user", JSON.stringify(result.user));
-            localStorage.setItem("token", JSON.stringify(result.auth));
-            navigate("/");
-        } else {
-            alert("Please enter correct Details");
-        }
     }
 
     return (

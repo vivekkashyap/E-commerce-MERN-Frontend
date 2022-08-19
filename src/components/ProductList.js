@@ -12,28 +12,33 @@ const ProductList = () => {
     }, []);
 
     const getProducts = async () => {
-        let result = await fetch(GET_PRODUCTS_URL, {
-            headers: { 
+        await fetch(GET_PRODUCTS_URL, {
+            headers: {
                 Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
+        }).then((res) => {
+            return res.json();
+        }).then((result) => {
+            console.warn(result);
+            setProducts(result);
         });
-        result = await result.json();
-        setProducts(result);
     }
 
     const deleteProduct = async (id) => {
-        let result = await fetch(PRODUCT_URL + id, {
+        await fetch(PRODUCT_URL + id, {
             method: DELETE,
             headers: {
                 Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
         }).then((res) => {
-            if (res.status == 200) {
-                console.warn(res.json());
+            return res.json();
+        }).then((result) => {
+            if (result.status == 200) {
+                console.warn(result);
                 alert("Product Deleted Successfully");
                 getProducts();
             }
-        })
+        });
     }
 
     const search = async (event) => {
@@ -42,15 +47,17 @@ const ProductList = () => {
             getProducts();
             return;
         }
-        let result = await fetch(SEARCH_URL + key, {
-            headers: { 
+        await fetch(SEARCH_URL + key, {
+            headers: {
                 Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
+        }).then((res) => {
+            return res.json();
+        }).then((result) => {
+            if (result) {
+                setProducts(result);
+            }
         });
-        result = await result.json();
-        if (result) {
-            setProducts(result);
-        }
     }
 
     return (

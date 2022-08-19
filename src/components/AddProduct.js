@@ -17,14 +17,17 @@ const AddProduct = () => {
         const userId = JSON.parse(localStorage.getItem('user'))._id;
         let result = await fetch(ADD_PRODUCT_URL, {
             method: POST,
-            body: JSON.stringify({name, price, category, userId, company}),
+            body: JSON.stringify({ name, price, category, userId, company }),
             headers: {
                 'Content-Type': APPLICATION_JSON,
                 Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
+        }).then((res) => {
+            return res.json();
+        }).then((result) => {
+            console.warn(result);
+            alert("Product Added Successfully!");
         });
-        result = await result.json();
-        console.warn(result);
     }
 
     return (

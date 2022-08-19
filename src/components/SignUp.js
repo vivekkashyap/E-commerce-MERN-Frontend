@@ -17,21 +17,23 @@ const SignUp = () => {
         }
     }, [])
 
-    const collectData = async() => {
-        let result = await fetch(SIGN_UP_URL, {
+    const collectData = async () => {
+        await fetch(SIGN_UP_URL, {
             method: POST,
-            body: JSON.stringify({name, email, password}),
+            body: JSON.stringify({ name, email, password }),
             headers: {
                 'Content-Type': APPLICATION_JSON
             },
+        }).then((res) => {
+            return res.json();
+        }).then((result) => {
+            console.warn(result);
+            if (result) {
+                localStorage.setItem("user", JSON.stringify(result.user));
+                localStorage.setItem("token", JSON.stringify(result.auth));
+                navigate('/');
+            }
         });
-        result = await result.json();
-        console.warn(result);
-        localStorage.setItem("user", JSON.stringify(result.user));
-        localStorage.setItem("token", JSON.stringify(result.auth));
-        if(result) {
-            navigate('/')
-        }
     }
 
     return(
