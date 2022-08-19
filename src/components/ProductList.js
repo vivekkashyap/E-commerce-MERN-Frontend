@@ -6,11 +6,17 @@ const ProductList = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getProducts();
+        return () => {
+            getProducts();
+        }
     }, []);
 
     const getProducts = async () => {
-        let result = await fetch(GET_PRODUCTS_URL);
+        let result = await fetch(GET_PRODUCTS_URL, {
+            headers: { 
+                Authorization: JSON.parse(localStorage.getItem('token'))
+            }
+        });
         result = await result.json();
         setProducts(result);
     }
